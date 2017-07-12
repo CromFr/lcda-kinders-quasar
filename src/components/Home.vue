@@ -1,6 +1,5 @@
 <template>
   <div>
-    YOLO!
   </div>
 </template>
 

@@ -1,8 +1,11 @@
 <template>
   <div>
-    <div class="absolute-top buttons">
-      <button class="primary circular" @click="showSkills = false"><i>settings_power</i></button>
-      <button class="primary circular" @click="showSkills = true"><i>toc</i></button>
+    <div class="toolbar dark">
+      <q-toolbar-title :padding="1">
+        <span v-for="(item, index) in character.classes">{{ item.name }} ({{ item.lvl }}) </span>
+      </q-toolbar-title>
+      <button @click="showSkills = false"><i>settings_power</i></button>
+      <button @click="showSkills = true"><i>toc</i></button>
     </div>
     <div class="row" v-if="!showSkills" style="margin-top: 60px">
       <div class="gt-bg width-1of4"></div>
@@ -146,20 +149,5 @@ export default {
 }
 </script>
 
-<!-- {
-  feats: [''],
-  className: ''.
-  skills: [{
-    name: '',
-    value: 0,
-    valueDiff: 0
-  }],
-  ability: ''
-} -->
-
 <style scoped>
-.buttons {
-  margin-left: calc((100% / 2) + 94px);
-  margin-top: 8px;
-}
 </style>

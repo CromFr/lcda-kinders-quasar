@@ -1,5 +1,16 @@
 <template>
   <div>
+    <div class="toolbar dark">
+      <q-toolbar-title :padding="1">
+        {{ character.name }} ({{ character.lvl }})
+      </q-toolbar-title>
+      <button v-if="character.status === 'active'" @click="deactivate()">
+        <i>delete</i>
+      </button>
+      <button v-if="character.status === 'inactive'" @click="activate()">
+        <i>replay</i>
+      </button>
+    </div>
     <div class="card">
       <div class="item two-lines">
         <i class="item-primary">face</i>

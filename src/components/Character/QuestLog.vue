@@ -2,7 +2,7 @@
   <div class="column" style="heigth: 100%">
     <div class="toolbar dark">
       <q-toolbar-title :padding="1">
-        <i>visibility_off</i> {{ questStats[0] }}/{{ questStats[3] }} <i>directions_run</i>{{ questStats[1] }}/{{ questStats[3] }} <i>done</i>{{ questStats[2] }}/{{ questStats[3] }}
+        <i>visibility_off</i> {{ questStats[0] }} <i style="margin-left: 5px">directions_run</i>{{ questStats[1] }}  <i style="margin-left: 5px">done</i>{{ questStats[2] }}
       </q-toolbar-title>
       <button @click="toggleOrder()"><i>sort_by_alpha</i></button>
       <button>
@@ -36,7 +36,6 @@
           v-if="stateVisibility[item.state]"
           >
           <div>
-            priority: {{ item.priority }} <br />
             {{ item.description }}
           </div>
         </q-collapsible>

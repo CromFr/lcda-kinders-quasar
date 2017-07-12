@@ -4,34 +4,30 @@
       <q-toolbar-title :padding="1">
           Personnages
       </q-toolbar-title>
+      <button>
+        <i>visibility</i>
+        <q-popover ref="visibilityPop">
+          <div class="list">
+            <label class="item">
+              <q-checkbox v-model="showActive"></q-checkbox>
+              Actifs
+            </label>
+            <label class="item">
+              <q-checkbox v-model="showInactive"></q-checkbox>
+              Inactifs
+            </label>
+          </div>
+        </q-popover>
+      </button>
       <button @click="sync()">
         <i v-if="!loading">autorenew</i>
         <spinner v-if="loading" color="white" size="20"></spinner>
       </button>
     </div>
-    <div class="list">
-      <q-collapsible group="accordion" icon="visibility" label="Affichage">
-        <div>
-          <label>
-            <q-checkbox v-model="showActive"></q-checkbox>
-            Actifs
-          </label>
-          <label>
-            <q-checkbox v-model="showInactive"></q-checkbox>
-            Inactifs
-          </label>
-        </div>
-      </q-collapsible>
-      <!-- <q-collapsible group="accordion" icon="search" label="Recherche">
-        <div>
-          Todo: find characters with 100% kinders drop chance by dungeon/difficulty
-        </div>
-      </q-collapsible> -->
-    </div>
     <hidden-scrollbar class="auto">
       <div slot="scrollContent" class="list no-border item-delimiter">
         <hr v-if="showActive"/>
-        <div class="list-label" v-if="showActive">Personnages actifs</div>
+        <div class="list-label" v-if="showActive">Actifs ({{ characters.active.length }})</div>
         <hr v-if="showActive"/>
         <char-list-item
             v-for="(item, index) in characters.active"
@@ -40,7 +36,7 @@
             v-if="showActive">
         </char-list-item>
         <hr v-if="showInactive"/>
-        <div class="list-label" v-if="showInactive">Personnages inactifs</div>
+        <div class="list-label" v-if="showInactive">Inactifs ({{ characters.inactive.length }})</div>
         <hr v-if="showInactive"/>
         <char-list-item
             v-for="(item, index) in characters.inactive"

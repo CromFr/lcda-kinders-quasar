@@ -35,7 +35,7 @@
         </div>
       </div>
       <div class="card-content">
-        <button @click="purge()">purge</button>
+        <!-- <button @click="purge()">purge</button> -->
         <q-progress-button
             indeterminate
             dark-filler
@@ -77,9 +77,9 @@ export default {
     validationGroup: ['login', 'password']
   },
   methods: {
-    purge () {
-      this.$store.dispatch('purgeSession')
-    },
+    // purge () {
+    //   this.$store.dispatch('purgeSession')
+    // },
     connect () {
       let self = this
 
