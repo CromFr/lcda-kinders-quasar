@@ -36,7 +36,7 @@ export default {
   mounted () {
     var el = this.$refs.scrollable
     var offset = this.getScrollbarWidth()
-    if (offset === undefined) {
+    if (offset <= 0) {
       offset = '00'
     }
     el.style.marginRight = '-1' + offset + 'px'
