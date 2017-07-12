@@ -36,6 +36,9 @@ export default {
   mounted () {
     var el = this.$refs.scrollable
     var offset = this.getScrollbarWidth()
+    if (offset === undefined) {
+      offset = '00'
+    }
     el.style.marginRight = '-1' + offset + 'px'
   }
 }

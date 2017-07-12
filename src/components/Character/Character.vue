@@ -79,58 +79,18 @@
         </table>
       </div>
     </div>
-    <div class="card">
-      <div class="item two-lines">
-        <i class="item-primary">starts</i>
-        <div class="item-content">
-          <div>
-
-          </div>
-          <div>
-          </div>
-        </div>
-      </div>
-      <div class="card-content">
-        <table class="q-table">
-          <thead>
-            <tr>
-              <th>Catégorie</th>
-              <th>Progression</th>
-              <th>Points</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>Niveaux</td>
-              <td>{{ character.lvl }} / 30</td>
-              <td>{{ character.lvl }} / 30</td>
-            </tr>
-            <tr>
-              <td>Quêtes</td>
-              <td>{{ questStats[2] }} / {{ questStats[3] }}</td>
-              <td>{{ questStats[2] * 4 }} / {{ questStats[3] * 4 }}</td>
-            </tr>
-            <tr>
-              <td>Kinders</td>
-              <td>{{ kinderStats[0][0] + kinderStats[1][0] + kinderStats[2][0] + kinderStats[3][0] + kinderStats[4][0] }}/{{ kinderStats[0][1] + kinderStats[1][1] + kinderStats[2][1] + kinderStats[3][1] + kinderStats[4][1] }}</td>
-              <td>{{ (kinderStats[0][0] + kinderStats[1][0] + kinderStats[2][0] + kinderStats[3][0] + kinderStats[4][0]) * 2 }}/{{ (kinderStats[0][1] + kinderStats[1][1] + kinderStats[2][1] + kinderStats[3][1] + kinderStats[4][1]) * 2 }}</td>
-            </tr>
-            <tr>
-              <td>Secrets</td>
-              <td>???/???</td>
-              <td>???/???</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-    </div>
+    <Achievements :lvl="character.lvl" :questStats="questStats" :kinderStats="kinderStats"></Achievements>
   </div>
 </template>
 
 <script>
 import api from '../../api/api'
+import Achievements from './Achievements'
 
 export default {
+  components: {
+    Achievements
+  },
   computed: {
     session () {
       return this.$store.getters.session

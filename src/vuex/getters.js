@@ -35,7 +35,7 @@ export const charStatsJournal = (state, getters) => (bicFileName) => {
 
 export const charStatsKinders = (state, getters) => (bicFileName) => {
   let dungeons = getters.character(bicFileName).dungeons
-  let stats = [[0, 0], [0, 0], [0, 0], [0, 0], [0, 0]]
+  let stats = [[0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0]]
   for (let i in dungeons) {
     for (let j in dungeons[i].lootedChests) {
       stats[j][1]++
@@ -44,5 +44,7 @@ export const charStatsKinders = (state, getters) => (bicFileName) => {
       }
     }
   }
+  stats[5][0] = stats[0][0] + stats[1][0] + stats[2][0] + stats[3][0] + stats[4][0]
+  stats[5][1] = stats[0][1] + stats[1][1] + stats[2][1] + stats[3][1] + stats[4][1]
   return stats
 }
