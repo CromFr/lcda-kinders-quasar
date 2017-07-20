@@ -1,13 +1,11 @@
 <template>
   <div>
     <div class="card">
-      <div class="item two-lines">
+      <div class="item">
         <i class="item-primary">starts</i>
         <div class="item-content">
           <div>
             <q-progress :percentage="progress"></q-progress>
-          </div>
-          <div>
           </div>
         </div>
       </div>

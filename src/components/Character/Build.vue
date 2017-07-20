@@ -84,8 +84,11 @@ export default {
     character () {
       return this.$store.getters.character(this.$route.params.bicFileName)
     },
+    lvls () {
+      return this.$store.getters.charLeveling(this.$route.params.bicFileName)
+    },
     skillNames () {
-      let used = _.filter(this.character.leveling[this.character.lvl - 1].skills, (o) => {
+      let used = _.filter(this.lvls[this.lvls.length - 1].skills, (o) => {
         return o.value > 0
       })
       let names = []
@@ -101,9 +104,9 @@ export default {
       let ability = []
       let feats = []
       let skills = []
-      for (let i in this.character.leveling) {
+      for (let i in this.lvls) {
         // class infos
-        let className = this.character.leveling[i].className
+        let className = this.lvls[i].className
         let cn = _.find(helper, { 'name': className })
         if (cn !== undefined) {
           cn.lvl++
@@ -118,11 +121,11 @@ export default {
         }
         classInfo.push(c)
         // abilities
-        ability.push(this.character.leveling[i].ability)
+        ability.push(this.lvls[i].ability)
         // feats
-        feats.push(this.character.leveling[i].feats)
+        feats.push(this.lvls[i].feats)
         // skills
-        skills.push(_.filter(this.character.leveling[i].skills, (o) => {
+        skills.push(_.filter(this.lvls[i].skills, (o) => {
           return _.indexOf(this.skillNames, o.name) > -1
         }))
       }

@@ -1,47 +1,26 @@
 import * as types from '../mutation-types'
-// import _ from 'lodash'
 
 const state = {
   main: {
-    active: [
-    //   {
-    //     bicFileName: 'toto',
-    //     classes: [{ lvl: 30, name: 'Bard'}],
-    //     lvl: 30,
-    //     name: 'Toto',
-    //     race: 'Aasimar',
-    //     status: 'active',
-    //     god: '',
-    //     abilities: [],
-    //     alignment: {},
-    //     dungeons: [],
-    //     journal: [],
-    //     leveling: []
-    //   }
-    ],
-    inactive: []
+    // bicFileName: {
+    //   abilities: [],
+    //   alignment: {},
+    //   classes: {},
+    //   god: '',
+    //   lvl: 0,
+    //   name: '',
+    //   race: ''
+    // }
   }
 }
 
 const mutations = {
-  [types.INIT_LISTS] (state, payload) {
-    state.main = payload
-    state.main.clear = []
+  [types.SET_CHARACTER] (state, payload) {
+    console.log(payload)
+    state.main[payload.bicFileName] = payload.character
   },
-  // [types.ADD_CHARACTER] (state, payload) {
-  // },
-  // activate
-  // deactivate
-  // [types.SET_DETAILS] (state, payload) {
-  //   for (let i in payload.details) {
-  //     state.main[payload.coordinates.status][payload.coordinates.index][i] = payload.details[i]
-  //   }
-  // },
   [types.PURGE_SESSION] (state) {
-    state.main = {
-      active: [],
-      inactive: []
-    }
+    state.main = {}
   }
 }
 

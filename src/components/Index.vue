@@ -11,7 +11,7 @@
         <i>face</i>
       </button>
       <q-toolbar-title :padding="0">
-        <button @click="$router.replace({ path: '/home' })">LCDA Kinders</button>
+        <button @click="$router.replace({ path: '/home' })">Hello {{ session.account }}!</button>
       </q-toolbar-title>
       <button @click="reset()"><i class="on-left">input</i>Déconnexion</button>
     </div>
@@ -58,7 +58,7 @@ export default {
 }
 </script>
 
-<style lang="stylus">
+<style lang="stylus" scoped>
 .navigation {
   margin-left: calc((100% / 2) - 181px);
 }

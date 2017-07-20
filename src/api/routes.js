@@ -1,4 +1,4 @@
-const baseUrl = 'https://api.lcda-nwn2.fr/'
+const baseUrl = 'https://home.thibautcharles.net/'// 'https://api.lcda-nwn2.fr/'
 
 function login (usr, pwd) {
   let route = baseUrl +

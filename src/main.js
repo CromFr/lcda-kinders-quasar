@@ -10,13 +10,13 @@ import Vue from 'vue'
 import Quasar from 'quasar'
 import router from './router'
 import store from './vuex/store'
-import axios from 'axios'
+// import axios from 'axios'
 // import _ from 'lodash'
 import Vuelidate from 'vuelidate'
 
 // Vue.prototype.$_ = _
 Vue.prototype.$store = store
-Vue.prototype.$http = axios
+// Vue.prototype.$http = axios
 Vue.use(Vuelidate)
 Vue.use(Quasar) // Install Quasar Framework
 

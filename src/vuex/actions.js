@@ -1,13 +1,5 @@
 import * as types from './mutation-types'
 
-export const decrementMain = ({ commit }) => {
-  commit(types.DECREMENT_MAIN_COUNTER)
-}
-
-export const incrementMain = ({ commit }) => {
-  commit(types.INCREMENT_MAIN_COUNTER)
-}
-
 // SESSION
 export const setSession = ({ commit }, payload) => {
   commit(types.SET_SESSION, payload)
@@ -17,18 +9,30 @@ export const purgeSession = ({ commit }) => {
   commit(types.PURGE_SESSION)
 }
 
-// CHARACTERS
-// export const addCharacter = ({ commit }, payload) => {
-//   commit(types.ADD_CHARACTER, payload)
-// }
-
-export const initLists = ({ commit }, payload) => {
-  commit(types.INIT_LISTS, payload)
+// CHARACTERLISTS
+export const syncCharLists = ({ commit }, payload) => {
+  commit(types.SYNC_CHAR_LISTS, payload)
 }
 
-// export const setDetails = ({ commit }, payload) => {
-//   commit(types.SET_DETAILS, payload)
-// }
+// CHARACTERS
+export const setCharacter = ({ commit }, payload) => {
+  commit(types.SET_CHARACTER, payload)
+}
+
+// QUESTLOGS
+export const setQuestLog = ({ commit }, payload) => {
+  commit(types.SET_QUEST_LOG, payload)
+}
+
+// KINDERS
+export const setKinders = ({ commit }, payload) => {
+  commit(types.SET_KINDERS, payload)
+}
+
+// LEVELINGS
+export const setLeveling = ({ commit }, payload) => {
+  commit(types.SET_LEVELING, payload)
+}
 
 // NAV
 export const setNav = ({ commit }, payload) => {

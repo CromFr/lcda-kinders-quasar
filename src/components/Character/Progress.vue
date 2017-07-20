@@ -2,7 +2,7 @@
   <div class="column" style="heigth: 100%">
     <div class="toolbar dark">
       <q-toolbar-title :padding="1">
-        Total {{ kinderStats[0][0] + kinderStats[1][0] + kinderStats[2][0] + kinderStats[3][0] + kinderStats[4][0] }}/{{ kinderStats[0][1] + kinderStats[1][1] + kinderStats[2][1] + kinderStats[3][1] + kinderStats[4][1] }}
+        Total {{ kinderStats[5][0] }} / {{ kinderStats[5][1] }}
       </q-toolbar-title>
       <button @click="toggleOrder()"><i>sort_by_alpha</i></button>
       <button>
@@ -78,7 +78,7 @@ export default {
   },
   computed: {
     dungeons () {
-      let dun = this.$store.getters.character(this.$route.params.bicFileName).dungeons.slice()
+      let dun = this.$store.getters.charKinders(this.$route.params.bicFileName).slice()
       if (this.order === 'asc') {
         return dun
       }
@@ -87,7 +87,7 @@ export default {
       }
     },
     kinderStats () {
-      return this.$store.getters.charStatsKinders(this.$route.params.bicFileName)
+      return this.$store.getters.charKindersStats(this.$route.params.bicFileName)
     }
   },
   methods: {

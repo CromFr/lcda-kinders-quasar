@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="column" style="heigth: 100%">
     <div class="toolbar dark">
       <q-toolbar-title :padding="1">
         {{ character.name }} ({{ character.lvl }})
@@ -11,84 +11,74 @@
         <i>replay</i>
       </button>
     </div>
-    <div class="card">
-      <div class="item two-lines">
-        <i class="item-primary">face</i>
-        <div class="item-content">
-          <div>
-            {{ character.name }} ({{ character.lvl }})
+    <HiddenScrollbar>
+      <div slot="scrollContent" class="row flex wrap">
+        <div class="card">
+          <div class="item two-lines">
+            <i class="item-primary">face</i>
+            <div class="item-content">
+              <div>
+                {{ character.name }} ({{ character.lvl }})
+              </div>
+              <div>
+                <span v-for="(item, index) in character.classes">{{ item.name }} ({{ item.lvl }}) </span>
+              </div>
+            </div>
           </div>
-          <div>
-            <span v-for="(item, index) in character.classes">{{ item.name }} ({{ item.lvl }}) </span>
-          </div>
-        </div>
-      </div>
-      <div class="card-content">
-        Race: {{ character.race }}<br />
-        Dieu: {{ character.god }}<br />
-        Alignement: {{ character.alignment.name }} ({{ character.alignment.law_chaos }}/{{ character.alignment.good_evil }})
-      </div>
-      <div class="card-actions">
-        <button
-            class="warning"
-            v-if="character.status === 'active'"
-            @click="deactivate()">
-          Désactiver
-        </button>
-        <button
-            class="primary"
-            v-if="character.status === 'inactive'"
-            @click="activate()">
-          Activer
-        </button>
-      </div>
-    </div>
-    <div class="card">
-      <div class="item two-lines">
-        <i class="item-primary">build</i>
-        <div class="item-content">
-          <div>
-            <span v-for="(item, index) in character.classes">{{ item.name }} ({{ item.lvl }}) </span>
-          </div>
-          <div>
+          <div class="card-content">
+            Race: {{ character.race }}<br />
+            Dieu: {{ character.god }}<br />
+            Alignement: {{ character.alignment.name }} ({{ character.alignment.law_chaos }}/{{ character.alignment.good_evil }})
           </div>
         </div>
+        <div class="card">
+          <div class="item">
+            <i class="item-primary">build</i>
+            <div class="item-content">
+              <div>
+                <span v-for="(item, index) in character.classes">{{ item.name }} ({{ item.lvl }}) </span>
+              </div>
+            </div>
+          </div>
+          <div class="card-content">
+            <table class="q-table cell-delimiter">
+              <thead>
+                <tr>
+                  <th>Caractéristique</th>
+                  <th>Valeur</th>
+                  <th>Modificateur</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr v-for="(item, index) in character.abilities">
+                  <td>
+                    {{ item.label }}
+                  </td>
+                  <td>
+                    {{ item.value }}
+                  </td>
+                  <td>
+                    {{ Math.floor((item.value - 10) / 2) }}
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <Achievements :lvl="character.lvl" :questStats="questStats" :kinderStats="kinderStats"></Achievements>
       </div>
-      <div class="card-content">
-        <table class="q-table cell-delimiter">
-          <thead>
-            <tr>
-              <th>Caractéristique</th>
-              <th>Valeur</th>
-              <th>Modificateur</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr v-for="(item, index) in character.abilities">
-              <td>
-                {{ item.label }}
-              </td>
-              <td>
-                {{ item.value }}
-              </td>
-              <td>
-                {{ Math.floor((item.value - 10) / 2) }}
-              </td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-    </div>
-    <Achievements :lvl="character.lvl" :questStats="questStats" :kinderStats="kinderStats"></Achievements>
+    </HiddenScrollbar>
   </div>
 </template>
 
 <script>
 import api from '../../api/api'
 import Achievements from './Achievements'
+import HiddenScrollbar from '../HiddenScrollbar'
 
 export default {
   components: {
+    HiddenScrollbar,
     Achievements
   },
   computed: {
@@ -99,10 +89,10 @@ export default {
       return this.$store.getters.character(this.$route.params.bicFileName)
     },
     questStats () {
-      return this.$store.getters.charStatsJournal(this.$route.params.bicFileName)
+      return this.$store.getters.charQuestLogStats(this.$route.params.bicFileName)
     },
     kinderStats () {
-      return this.$store.getters.charStatsKinders(this.$route.params.bicFileName)
+      return this.$store.getters.charKindersStats(this.$route.params.bicFileName)
     }
   },
   methods: {

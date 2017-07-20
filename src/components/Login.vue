@@ -1,7 +1,7 @@
 <template>
   <div class="row gutter items-center layout-padding" style="height: 100%">
     <div class="gt-md width-1of2"></div>
-    <div class="card auto" v-if="!loading">
+    <div class="card auto">
       <div class="card-title">
         Connexion
       </div>
@@ -35,7 +35,6 @@
         </div>
       </div>
       <div class="card-content">
-        <!-- <button @click="purge()">purge</button> -->
         <q-progress-button
             indeterminate
             dark-filler
@@ -55,7 +54,6 @@
 
 <script>
 import { required } from 'vuelidate/lib/validators'
-import { Loading } from 'quasar'
 import api from '../api/api'
 
 export default {
@@ -63,8 +61,7 @@ export default {
     return {
       login: '',
       password: '',
-      progress: 0,
-      loading: false
+      progress: 0
     }
   },
   validations: {
@@ -77,43 +74,31 @@ export default {
     validationGroup: ['login', 'password']
   },
   methods: {
-    // purge () {
-    //   this.$store.dispatch('purgeSession')
-    // },
     connect () {
       let self = this
 
       api.login(this.login, this.password)
       .then((response) => {
         self.progress = 101
+
         setTimeout(() => {
           self.progress = 0
         }, 500)
-        this.loading = true
-        Loading.show({
-          message: 'Chargement',
-          messageColor: 'blue',
-          spinnerSize: 250,
-          spinnerColor: 'blue'
-        })
+
         let session = {
           auth: true,
           account: response.data.session.account,
           admin: response.data.session.admin,
           token: response.data.token
         }
-        console.log(session)
-        api.loadAll(session)
-        .then((msg) => {
-          Loading.hide()
-          self.$router.replace('/home')
-          self.$store.dispatch('setSession', session)
-          this.loading = false
-        })
+        self.$router.replace('/home')
+        self.$store.dispatch('setSession', session)
       })
       .catch((error) => {
         console.log(error)
+
         self.progress = -1
+
         setTimeout(() => {
           self.progress = 0
         }, 1000)

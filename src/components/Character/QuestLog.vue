@@ -46,7 +46,6 @@
 
 <script>
 import HiddenScrollbar from '../HiddenScrollbar'
-import _ from 'lodash'
 
 export default {
   components: {
@@ -62,15 +61,15 @@ export default {
   },
   computed: {
     questLog () {
-      let log = this.$store.getters.character(this.$route.params.bicFileName).journal
-      return _.orderBy(log, ['name'], [this.order])
+      return this.$store.getters.charQuestLog(this.$route.params.bicFileName)
     },
     questStats () {
-      return this.$store.getters.charStatsJournal(this.$route.params.bicFileName)
+      return this.$store.getters.charQuestLogStats(this.$route.params.bicFileName)
     }
   },
   methods: {
     toggleOrder () {
+      console.log('TODO: quest log orderBy')
       this.order = this.order === 'asc' ? 'desc' : 'asc'
     },
     setNav (path) {

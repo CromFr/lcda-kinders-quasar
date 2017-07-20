@@ -1,5 +1,5 @@
 import axios from 'axios'
-import store from '../vuex/store'
+// import store from '../vuex/store'
 import routes from './routes'
 import RequestQueue from './RequestQueue'
 
@@ -61,65 +61,66 @@ function loadCharLists (session) {
   })
 }
 
-function loadAllCharDetails (args) {
-  let detailsReq = []
-  let detailsArgs = []
-
-  for (let i in args.characters.active) {
-    detailsReq.push(getDetails)
-    detailsArgs.push({ char: args.characters.active[i], session: args.session })
-  }
-  for (let i in args.characters.inactive) {
-    detailsReq.push(getDetails)
-    detailsArgs.push({ char: args.characters.inactive[i], session: args.session })
-  }
-
-  let onError = (error) => {
-    console.log(error)
-    return true
-  }
-
-  let queue = new RequestQueue(detailsReq, detailsArgs, onError)
-
-  return new Promise((resolve) => {
-    queue.start()
-    .then((data) => {
-      for (var i in args.characters.active) {
-        args.characters.active[i].god = data[i].god
-        args.characters.active[i].abilities = data[i].abilities
-        args.characters.active[i].alignment = data[i].alignment
-        args.characters.active[i].dungeons = data[i].dungeons
-        args.characters.active[i].journal = data[i].journal
-        args.characters.active[i].leveling = data[i].leveling
-      }
-      for (let j in args.characters.inactive) {
-        i++
-        args.characters.inactive[j].god = data[i].god
-        args.characters.inactive[j].abilities = data[i].abilities
-        args.characters.inactive[j].alignment = data[i].alignment
-        args.characters.inactive[j].dungeons = data[i].dungeons
-        args.characters.inactive[j].journal = data[i].journal
-        args.characters.inactive[j].leveling = data[i].leveling
-      }
-      resolve(args)
-    })
-  })
-}
-
-function loadAll (session) {
-  return new Promise((resolve) => {
-    loadCharLists(session)
-    .then(loadAllCharDetails)
-    .then((data) => {
-      store.dispatch('initLists', data.characters)
-      resolve('done')
-    })
-  })
-}
+// function loadAllCharDetails (args) {
+//   let detailsReq = []
+//   let detailsArgs = []
+//
+//   for (let i in args.characters.active) {
+//     detailsReq.push(getDetails)
+//     detailsArgs.push({ char: args.characters.active[i], session: args.session })
+//   }
+//   for (let i in args.characters.inactive) {
+//     detailsReq.push(getDetails)
+//     detailsArgs.push({ char: args.characters.inactive[i], session: args.session })
+//   }
+//
+//   let onError = (error) => {
+//     console.log(error)
+//     return true
+//   }
+//
+//   let queue = new RequestQueue(detailsReq, detailsArgs, onError)
+//
+//   return new Promise((resolve) => {
+//     queue.start()
+//     .then((data) => {
+//       for (var i in args.characters.active) {
+//         args.characters.active[i].god = data[i].god
+//         args.characters.active[i].abilities = data[i].abilities
+//         args.characters.active[i].alignment = data[i].alignment
+//         args.characters.active[i].dungeons = data[i].dungeons
+//         args.characters.active[i].journal = data[i].journal
+//         args.characters.active[i].leveling = data[i].leveling
+//       }
+//       for (let j in args.characters.inactive) {
+//         i++
+//         args.characters.inactive[j].god = data[i].god
+//         args.characters.inactive[j].abilities = data[i].abilities
+//         args.characters.inactive[j].alignment = data[i].alignment
+//         args.characters.inactive[j].dungeons = data[i].dungeons
+//         args.characters.inactive[j].journal = data[i].journal
+//         args.characters.inactive[j].leveling = data[i].leveling
+//       }
+//       resolve(args)
+//     })
+//   })
+// }
+//
+// function loadAll (session) {
+//   return new Promise((resolve) => {
+//     loadCharLists(session)
+//     .then(loadAllCharDetails)
+//     .then((data) => {
+//       store.dispatch('initLists', data.characters)
+//       resolve('done')
+//     })
+//   })
+// }
 
 export default {
   login,
   activateChar,
   deactivateChar,
-  loadAll
+  loadCharLists,
+  getDetails
 }

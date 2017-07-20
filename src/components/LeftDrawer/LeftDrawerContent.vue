@@ -71,18 +71,21 @@ export default {
       return this.$store.getters.session
     },
     characters () {
-      return this.$store.getters.characters
+      return this.$store.getters.characterLists
     }
   },
   methods: {
     sync () {
       this.loading = true
-      api.loadAll(this.session)
-      .then((msg) => {
-        console.log(msg)
+      api.loadCharLists(this.session)
+      .then((result) => {
+        this.$store.dispatch('syncCharLists', result.characters)
         this.loading = false
       })
     }
+  },
+  mounted () {
+    this.sync()
   }
 }
 </script>
