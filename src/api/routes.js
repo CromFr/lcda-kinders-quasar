@@ -1,7 +1,7 @@
-const baseUrl = 'https://home.thibautcharles.net/'// 'https://api.lcda-nwn2.fr/'
+const apiUrl = process.env.API_URL
 
 function login (usr, pwd) {
-  let route = baseUrl +
+  let route = apiUrl +
               'login/?login=' +
               encodeURIComponent(usr) +
               '&password=' +
@@ -10,7 +10,7 @@ function login (usr, pwd) {
 }
 
 function actives (session) {
-  let route = baseUrl +
+  let route = apiUrl +
               session.account +
               '/characters/?private-token=' +
               session.token
@@ -18,7 +18,7 @@ function actives (session) {
 }
 
 function inactives (session) {
-  let route = baseUrl +
+  let route = apiUrl +
               session.account +
               '/deletedchars/?private-token=' +
               session.token
@@ -27,7 +27,7 @@ function inactives (session) {
 
 function details (char, session) {
   let sub = char.status === 'active' ? '/characters/' : '/deletedchars/'
-  let route = baseUrl +
+  let route = apiUrl +
               session.account +
               sub +
               char.bicFileName +
@@ -37,7 +37,7 @@ function details (char, session) {
 }
 
 function activate (char, session) {
-  let route = baseUrl +
+  let route = apiUrl +
               session.account +
               '/deletedchars/' +
               char.bicFileName +
@@ -48,7 +48,7 @@ function activate (char, session) {
 }
 
 function deactivate (char, session) {
-  let route = baseUrl +
+  let route = apiUrl +
               session.account +
               '/characters/' +
               char.bicFileName +
